@@ -1,0 +1,32 @@
+<%= form_with(model: document_select, local: true) do |form| %>
+  <% if document_select.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(document_select.errors.count, "error") %> prohibited this document_select from being saved:</h2>
+
+      <ul>
+      <% document_select.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :document_select_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :select_number %>
+    <%= form.number_field :select_number, id: :document_select_select_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :document_item_id %>
+    <%= form.number_field :document_item_id, id: :document_select_document_item_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

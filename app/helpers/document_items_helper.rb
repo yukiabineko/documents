@@ -1,0 +1,2 @@
+module DocumentItemsHelper
+end

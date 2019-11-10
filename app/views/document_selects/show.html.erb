@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @document_select.content %>
+</p>
+
+<p>
+  <strong>Select number:</strong>
+  <%= @document_select.select_number %>
+</p>
+
+<p>
+  <strong>Document item:</strong>
+  <%= @document_select.document_item_id %>
+</p>
+
+<%= link_to 'Edit', edit_document_select_path(@document_select) %> |
+<%= link_to 'Back', document_selects_path %>

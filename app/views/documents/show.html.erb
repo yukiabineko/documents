@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @document.title %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @document.memo %>
+</p>
+
+<p>
+  <strong>Pdf link:</strong>
+  <%= @document.pdf_link %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @document.deadline %>
+</p>
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>

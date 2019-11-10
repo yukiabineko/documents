@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Document Selects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Select number</th>
+      <th>Document item</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @document_selects.each do |document_select| %>
+      <tr>
+        <td><%= document_select.content %></td>
+        <td><%= document_select.select_number %></td>
+        <td><%= document_select.document_item_id %></td>
+        <td><%= link_to 'Show', document_select %></td>
+        <td><%= link_to 'Edit', edit_document_select_path(document_select) %></td>
+        <td><%= link_to 'Destroy', document_select, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Document Select', new_document_select_path %>
