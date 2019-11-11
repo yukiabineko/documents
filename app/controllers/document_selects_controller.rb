@@ -15,6 +15,8 @@ class DocumentSelectsController < ApplicationController
   # GET /document_selects/new
   def new
     @document_select = DocumentSelect.new
+    @document_item = DocumentItem.find(params[:id])
+    @document_select.document_item_id = @document_item.id
   end
 
   # GET /document_selects/1/edit
@@ -25,10 +27,10 @@ class DocumentSelectsController < ApplicationController
   # POST /document_selects.json
   def create
     @document_select = DocumentSelect.new(document_select_params)
-
+  
     respond_to do |format|
       if @document_select.save
-        format.html { redirect_to @document_select, notice: 'Document select was successfully created.' }
+        format.html { redirect_to '/documents_selects/new/'+@document_select.document_item_id.to_s }
         format.json { render :show, status: :created, location: @document_select }
       else
         format.html { render :new }
@@ -69,6 +71,6 @@ class DocumentSelectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_select_params
-      params.require(:document_select).permit(:content, :select_number, :document_item_id)
+      params.require(:document_select).permit(:content, :document_item_id)
     end
 end

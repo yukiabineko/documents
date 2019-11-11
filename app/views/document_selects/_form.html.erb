@@ -12,21 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :content %>
+    <%= form.label :選択肢内容 %>
     <%= form.text_area :content, id: :document_select_content %>
   </div>
 
   <div class="field">
-    <%= form.label :select_number %>
-    <%= form.number_field :select_number, id: :document_select_select_number %>
-  </div>
-
-  <div class="field">
-    <%= form.label :document_item_id %>
-    <%= form.number_field :document_item_id, id: :document_select_document_item_id %>
+    <%= form.hidden_field :document_item_id %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "送信",class:"btn btn-primary" %>
   </div>
 <% end %>

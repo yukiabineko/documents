@@ -12,16 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content, id: :document_item_content %>
+    <%= form.label :質問内容 %>
+    <%= form.text_area :content, id: :document_item_content,rows:5,class:"form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :document_id %>
-    <%= form.number_field :document_id, id: :document_item_document_id %>
+    <%= form.hidden_field :document_id%>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "送信",class:"btn btn-primary" %>
   </div>
 <% end %>

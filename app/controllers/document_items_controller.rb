@@ -12,9 +12,10 @@ class DocumentItemsController < ApplicationController
   def show
   end
 
-  # GET /document_items/new
   def new
+    @document = Document.find(params[:id])
     @document_item = DocumentItem.new
+    @document_item.document_id = @document.id
   end
 
   # GET /document_items/1/edit
@@ -28,7 +29,7 @@ class DocumentItemsController < ApplicationController
 
     respond_to do |format|
       if @document_item.save
-        format.html { redirect_to @document_item, notice: 'Document item was successfully created.' }
+        format.html { redirect_to "/documents_selects/new/"+@document_item.id.to_s }
         format.json { render :show, status: :created, location: @document_item }
       else
         format.html { render :new }

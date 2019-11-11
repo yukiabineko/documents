@@ -1,24 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% if @input_count > 0 && @select_count ==false %>
+  <%= render 'select'%>
+<% elsif @input_count >0 && @select_count %>
+  <%= render 'input' %>  
+<% elsif @input_count == 0 %>  
+   <%= render 'pdf' %>  
+<% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @document.title %>
-</p>
 
-<p>
-  <strong>Memo:</strong>
-  <%= @document.memo %>
-</p>
-
-<p>
-  <strong>Pdf link:</strong>
-  <%= @document.pdf_link %>
-</p>
-
-<p>
-  <strong>Deadline:</strong>
-  <%= @document.deadline %>
-</p>
-
-<%= link_to 'Edit', edit_document_path(@document) %> |
 <%= link_to 'Back', documents_path %>

@@ -1,5 +1,6 @@
-<h1>New Document Select</h1>
-
+<h1>選択肢作成</h1>
+<h2><%= "質問:#{@document_item.content}" %>
 <%= render 'form', document_select: @document_select %>
 
-<%= link_to 'Back', document_selects_path %>
+<%= link_to '終了', root_path,class:"btn btn-default" %>
+<%= link_to "新規質問作成","/documents_items/new/"+@document_item.document_id.to_s,class:"btn btn-primary" %>

@@ -10,6 +10,8 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
+    @input_count = @document.document_items.all.count
+    @select_count = select_zerocount?
   end
 
   # GET /documents/new
@@ -28,7 +30,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
-        format.html { redirect_to @document, notice: 'Document was successfully created.' }
+        format.html { redirect_to "/documents_items/new/"+@document.id.to_s }
         format.json { render :show, status: :created, location: @document }
       else
         format.html { render :new }
@@ -60,6 +62,11 @@ class DocumentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def sendform
+    debugger
+  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
