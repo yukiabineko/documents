@@ -30,6 +30,7 @@ class DocumentSelectsController < ApplicationController
   
     respond_to do |format|
       if @document_select.save
+        flash[:danger] = "引き続き項目作るならフォーム入力して送信を終わりなら終了ボタン押してください"
         format.html { redirect_to '/documents_selects/new/'+@document_select.document_item_id.to_s }
         format.json { render :show, status: :created, location: @document_select }
       else

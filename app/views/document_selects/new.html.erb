@@ -1,4 +1,7 @@
 <h1>選択肢作成</h1>
+<% if flash[:danger].present? %>
+  <div class="alert alert-danger"><%= flash[:danger] %></div>
+<% end %>
 <h2><%= "質問:#{@document_item.content}" %>
 <%= render 'form', document_select: @document_select %>
 

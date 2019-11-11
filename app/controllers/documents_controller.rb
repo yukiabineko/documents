@@ -14,17 +14,21 @@ class DocumentsController < ApplicationController
     @select_count = select_zerocount?
   end
 
-  # GET /documents/new
+  # 選択
   def new
     @document = Document.new
   end
-
+  
+  #入力
+  def new2
+    @document = Document.new
+  end
   # GET /documents/1/edit
   def edit
   end
 
   # POST /documents
-  # POST /documents.json
+  # 選択createw
   def create
     @document = Document.new(document_params)
 
@@ -38,6 +42,16 @@ class DocumentsController < ApplicationController
       end
     end
   end
+#入力create
+  def create2
+    @document = Document.new(document_params)
+    if @document.save
+      redirect_to "/documents_items/new2/"+@document.id.to_s 
+    else
+      render :new2
+    end    
+    
+  end  
 
   # PATCH/PUT /documents/1
   # PATCH/PUT /documents/1.json

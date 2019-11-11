@@ -11,8 +11,14 @@ class DocumentItemsController < ApplicationController
   # GET /document_items/1.json
   def show
   end
-
+#選択式
   def new
+    @document = Document.find(params[:id])
+    @document_item = DocumentItem.new
+    @document_item.document_id = @document.id
+  end
+#選択式2  
+ def new2
     @document = Document.find(params[:id])
     @document_item = DocumentItem.new
     @document_item.document_id = @document.id
@@ -37,6 +43,16 @@ class DocumentItemsController < ApplicationController
       end
     end
   end
+  def create2
+    @document_item = DocumentItem.new(document_item_params)
+    if @document_item.save
+      flash[:danger] = "引き続き項目作るならフォーム入力して送信を終わりなら終了ボタン押してください"
+      redirect_to "/documents_items/new2/"+@document_item.document_id.to_s
+    else
+      render :new
+    end    
+    
+  end  
 
   # PATCH/PUT /document_items/1
   # PATCH/PUT /document_items/1.json
