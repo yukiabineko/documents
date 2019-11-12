@@ -1,1 +1,14 @@
 <h1>入力式提出</h1>
+<hr>
+<h2><%= @document.title %></h2>
+<div style="border:1px solid black;padding:6px;">
+  <h3><%= @document.memo %></h3>
+  <strong style="color:red"><%=@document.deadline %></strong>
+</div>
+<% count_item = 0 %>
+<%= form_with(url:"#",local:true) do |f| %>
+  <% @document.document_items.each do |item| %>
+    <%= f.label item.content %>
+     <textarea name="r<%= item.content %>" class="form-control" rows="5"></textarea>
+  <% end %>
+<% end %>    
