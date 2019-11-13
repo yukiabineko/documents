@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-<div class="row" style="background-color:#fff;border-radius:8px;">
+<div class="row" style="background-color:#c0c0c0;border-radius:8px;">
   <div class="col-md-8 col-md-offset-2">
     <div class="field">
       <%= form.label :タイトル %>
@@ -24,9 +24,12 @@
       </div>
     <% end %>
 
+    <%= form.label "サービス選択" %>
+    <%= form.select :service,service_select,{},class:"form-control" %>
+
     <div class="field">
       <%= form.label :外部リンク %>
-      <%= form.text_field :pdf_link, id: :document_pdf_link,class:"form-control" %>
+      <%= form.text_field :service_url, id: :document_pdf_link,class:"form-control" %>
     </div>
 
     <div class="field">

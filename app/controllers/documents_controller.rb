@@ -106,6 +106,7 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
+      params[:document][:pdf_link] = view_url(params[:document][:service],params[:document][:service_url])
       params.require(:document).permit(:title, :memo, :pdf_link, :deadline)
     end
 end
