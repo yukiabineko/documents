@@ -23,7 +23,13 @@ class DocumentsController < ApplicationController
   def new2
     @document = Document.new
   end
-  # GET /documents/1/edit
+
+  #表示
+  def new3
+    @document = Document.new
+  end
+  
+
   def edit
   end
 
@@ -51,7 +57,17 @@ class DocumentsController < ApplicationController
       render :new2
     end    
     
-  end  
+  end
+  #表示create
+  def create3
+    @document = Document.new(document_params)
+    if @document.save
+      redirect_to root_url
+    else
+      render :new3
+    end    
+    
+  end    
 
   # PATCH/PUT /documents/1
   # PATCH/PUT /documents/1.json

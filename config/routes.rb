@@ -11,7 +11,11 @@ Rails.application.routes.draw do
 
   get "documents/new2",to:"documents#new2",as: :new2_document
   get "documents/new2/:id",to:"documents#new2"
+
+  get "documents/new3",to:"documents#new3",as: :new3_document
+  get "documents/new3/:id",to:"documents#new3"
   post "documents/create2",to:"documents#create2",as: :document_create2
+  post "documents/create3",to:"documents#create3",as: :document_create3
   resources :documents
   post "documents/sendform/:id",to:"documents#sendform"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

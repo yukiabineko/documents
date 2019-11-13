@@ -1,5 +1,9 @@
 <h1>新規書類作成(選択)</h1>
+<%= provide(:url,documents_path) %>
 
 <%= render 'form', document: @document %>
 
 <%= link_to '戻る', documents_path,class:"btn btn-default" %>
+<style>
+  body{ background-color:#00FF00;}
+</style>

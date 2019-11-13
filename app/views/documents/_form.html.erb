@@ -1,4 +1,4 @@
-<%= form_with(model: document, local: true) do |form| %>
+<%= form_with(model: document,url:yield(:url), local: true) do |form| %>
   <% if document.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
@@ -10,28 +10,33 @@
       </ul>
     </div>
   <% end %>
+<div class="row" style="background-color:#fff;border-radius:8px;">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="field">
+      <%= form.label :タイトル %>
+      <%= form.text_field :title, id: :document_title,class:"form-control" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :タイトル %>
-    <%= form.text_field :title, id: :document_title,class:"form-control" %>
-  </div>
+    <% unless yield(:url) == document_create3_path %>
+      <div class="field">
+        <%= form.label :資料の概要 %>
+        <%= form.text_area :memo, id: :document_memo,class:"form-control" %>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <%= form.label :資料の概要 %>
-    <%= form.text_area :memo, id: :document_memo,class:"form-control" %>
-  </div>
+    <div class="field">
+      <%= form.label :外部リンク %>
+      <%= form.text_field :pdf_link, id: :document_pdf_link,class:"form-control" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :外部リンク %>
-    <%= form.text_area :pdf_link, id: :document_pdf_link,class:"form-control" %>
-  </div>
+    <div class="field">
+      <%= form.label :期限　%>
+      <%= form.date_field :deadline, id: :document_deadline,class:"form-control" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :期限　%>
-    <%= form.date_field :deadline, id: :document_deadline,class:"form-control" %>
+    <div class="actions">
+      <%= form.submit "送信",class:"btn btn-primary" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= form.submit "送信",class:"btn btn-primary" %>
-  </div>
+</div>  
 <% end %>
