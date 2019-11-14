@@ -20,5 +20,7 @@ Rails.application.routes.draw do
   post "documents/create3",to:"documents#create3",as: :document_create3
   resources :documents
   post "documents/selectform/:id",to:"documents#selectform",as: :selectform
+  post "documents/inputform/:id",to:"documents#inputform",as: :inputform
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

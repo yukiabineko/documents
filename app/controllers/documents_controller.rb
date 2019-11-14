@@ -116,7 +116,15 @@ class DocumentsController < ApplicationController
       render :selectform
     end 
   end
-  
+#入力式保護者処理
+  def inputform  
+    @document = Document.find(params[:id])
+    answer = Answer.new
+    answer.document_id = params[:id]
+    100.times do |i|
+      
+    end   
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
