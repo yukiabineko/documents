@@ -121,9 +121,16 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     answer = Answer.new
     answer.document_id = params[:id]
+    reply = ""
     100.times do |i|
-      
+      str= "tx"+i.to_s 
+      if params[str].present?
+        reply += params[str]+":"
+      end   
     end   
+    answer.reply = reply
+    answer.save
+    redirect_to root_url
   end
 
   private

@@ -22,13 +22,19 @@ pre {
   padding: 10px;
   font-size: 11px;
 }
+table{
+  vertical-align: middle;
+}
 
 th {
   padding-bottom: 5px;
+  vertical-align: middle;
 }
 
 td {
   padding: 0 5px 7px;
+  vertical-align: middle;
+  font-weight:bold;
 }
 
 div {

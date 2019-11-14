@@ -18,23 +18,31 @@
       <tr>
         <td><%= document.title %></td>
         <td><%= document.memo %></td>
-        <td><div class="bg-danger"><%= document.answers.count >0 ? "提出済み" : document.deadline %></div></td>
+        <td>
+          <div class="bg-danger">
+            <% if document.document_items.count > 0 && document.deadline.present? %>
+              <%= document.answers.count >0 ? "提出済み" : "提出期限:#{document.deadline}" %>
+            <% elsif document.document_items.count == 0 && document.deadline.present?  %>
+              <%= "表示期限:#{document.deadline}" %>
+            <% end %>    
+          </div>
+        </td>
         <td><%= link_to '見る', document %></td>
         <td><%= link_to '編集', edit_document_path(document) %></td>
         <td><%= link_to '削除', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td>
-          <% unless document.answers.nil? %>
-            <% if document.answers.last.present? %>
-              <div id="answer">
-                <% reply_view(document).each do |data| %>
-                  <% str = data.split(":") %>
-                  <label style="color:blue">「<%= str[0] %>」&emsp;<span style="color:black;"><%= str[1] %></span></label>
-                <% end %>
-              </div>
-            <% end %>  
-          <% end %>  
-        </td>
       </tr>
+      <% unless document.answers.nil? %>
+        <% if document.answers.last.present? %>
+        <tr><td colspan="8">
+          <div id="answer">
+            <% reply_view(document).each do |data| %>
+              <% str = data.split(":") %>
+              <label style="color:blue">「<%= str[0] %>」<br>&emsp;<span style="color:black;"><%= str[1] %></span></label>
+            <% end %>
+          </div>
+        </td></tr>    
+        <% end %>
+      <% end %>
     <% end %>
   </tbody>
 </table>
@@ -52,4 +60,5 @@
    overflow:scroll;
    border:1px solid blue;
  }
+ 
 </style>
