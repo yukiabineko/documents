@@ -25,11 +25,12 @@
         <td>
           <% unless document.answers.nil? %>
             <% if document.answers.last.present? %>
-              <textarea readonly="true" class="form-control" rows="5" style="background-color:#fff;">
+              <div id="answer">
                 <% reply_view(document).each do |data| %>
-                  <%= data %>
+                  <% str = data.split(":") %>
+                  <label style="color:blue">「<%= str[0] %>」&emsp;<span style="color:black;"><%= str[1] %></span></label>
                 <% end %>
-              </textarea>
+              </div>
             <% end %>  
           <% end %>  
         </td>
@@ -44,4 +45,11 @@
 <%= link_to '入力式作成', new2_document_path,class:"btn btn-danger",style:"width:45%;height:40px;" %><br><br>
 <%= link_to '表示式作成', new3_document_path,class:"btn btn-primary",style:"width:45%;height:40px;" %>
 
-
+<style>
+ #answer{
+   width:100%;
+   height:100px;
+   overflow:scroll;
+   border:1px solid blue;
+ }
+</style>
