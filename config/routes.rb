@@ -19,6 +19,6 @@ Rails.application.routes.draw do
   post "documents/create2",to:"documents#create2",as: :document_create2
   post "documents/create3",to:"documents#create3",as: :document_create3
   resources :documents
-  post "documents/sendform/:id",to:"documents#sendform"
+  post "documents/selectform/:id",to:"documents#selectform",as: :selectform
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

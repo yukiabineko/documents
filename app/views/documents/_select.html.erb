@@ -14,7 +14,7 @@
  <%= link_to "外部資料表示",data_path(@document),remote:true,style:"font-size:24px;" %>
 <% end %> 
 <% item_count = 0 %>
-<%= form_with(url:"/documents/sendform/"+@document.id.to_s,local:true) do |f| %>
+<%= form_with(url:selectform_path(@document),local:true) do |f| %>
  <% @document.document_items.each do |item| %>
    <h2 style="background-color:orange;border-left:8px solid blue;padding:12px;">
      <%= item.content %>

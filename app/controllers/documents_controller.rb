@@ -97,9 +97,24 @@ class DocumentsController < ApplicationController
   def data
    @document = Document.find(params[:id])
   end
-
-  def sendform
-    debugger
+#選択式保護者処理
+  def selectform
+    @document = Document.find(params[:id])
+    answer = Answer.new
+    answer.document_id = params[:id]
+    reply = ""
+    100.times do |i|
+      str = "rd"+i.to_s
+      if params[str].present?
+        reply += params[str] + ":"
+      end  
+    end  
+    answer.reply = reply
+    if answer.save
+     redirect_to root_url
+    else 
+      render :selectform
+    end 
   end
   
 

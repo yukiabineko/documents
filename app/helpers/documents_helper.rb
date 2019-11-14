@@ -33,6 +33,21 @@ module DocumentsHelper
        end  
      end 
   end
+#answer reply加工
+def reply_view(document)
+  array = []
+  count = 0  #each文のカウント
+  #項目があるか？
+  if document.document_items.all.count > 0
+    document.document_items.all.each do |item|
+      array << (count+1).to_s+item.content.to_s+":"+document.answers.last.reply.split(":")[count].to_s
+      count +=1
+    end  
+    return array
+  else
+    return nil
+  end    
+end
   
   
 end
