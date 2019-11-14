@@ -1,10 +1,15 @@
 <h1>入力式提出</h1>
 <hr>
 <h2><%= @document.title %></h2>
-<div style="border:1px solid black;padding:6px;">
+<div style="border:1px solid black;padding:6px;background-color:#fff;">
   <h3><%= @document.memo %></h3>
   <strong style="color:red"><%=@document.deadline %></strong>
 </div>
+<hr>
+<% unless @document.pdf_link.blank? || @document.pdf_link.nil? %>
+  <%= link_to "外部資料表示",data_path(@document),remote:true,style:"font-size:24px;" %>
+<% end %>  
+<div id="pdf-modal" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true"></div>
 <% count_item = 0 %>
 <%= form_with(url:"#",local:true) do |f| %>
   <% @document.document_items.each do |item| %>
@@ -12,3 +17,6 @@
      <textarea name="r<%= item.content %>" class="form-control" rows="5"></textarea>
   <% end %>
 <% end %>    
+<style>
+  body{background-color:#FFE4C4;}
+</style>

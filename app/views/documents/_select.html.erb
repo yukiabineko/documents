@@ -4,11 +4,15 @@
   <h1><%= @document.title %></h1>
 </div>
 <hr>
-<div style="border:1px solid black;padding:8px;">
+<div id="pdf-modal" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true"></div>
+<div style="border:1px solid black;padding:8px;background-color:#fff;">
   <h3><%= @document.memo %></h3>
   <strong style="color:red">期限:<%= @document.deadline %></strong>
 </div>
 <hr>
+<% unless @document.pdf_link.blank? || @document.pdf_link.nil? %>
+ <%= link_to "外部資料表示",data_path(@document),remote:true,style:"font-size:24px;" %>
+<% end %> 
 <% item_count = 0 %>
 <%= form_with(url:"/documents/sendform/"+@document.id.to_s,local:true) do |f| %>
  <% @document.document_items.each do |item| %>
@@ -17,7 +21,7 @@
    </h2>
    <% item.document_selects.each do |select| %>
      <% item_count += 1 %>
-     <div style="border-radius:6px;padding:3px;border:0.5px solid blue;">
+     <div style="border-radius:6px;padding:3px;border:0.5px solid blue;background-color:#fff;">
        <label style="font-size:16px">
          <input type="radio" name="rd<%=item_count %>" value="<%= select.content %>">
          <%= select.content %>
@@ -29,3 +33,6 @@
    <%= f.submit "提出",class:"btn btn-primary",style:"width:40%"%>
  </div>
 <% end %>
+<style>
+  body{background-color:#FFE4C4;}
+</style>

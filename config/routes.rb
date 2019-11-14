@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root 'documents#index'
+
+  get "documents/pdf-modal/:id",to:"documents#data",as: :data
   resources :answers
   resources :document_selects
   get "documents_selects/new/:id",to:"document_selects#new"

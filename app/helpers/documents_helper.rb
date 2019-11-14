@@ -21,6 +21,7 @@ module DocumentsHelper
      if link.blank?
       url == nil
       link == nil
+      return nil
      else 
        if url == "Google Drive"
          #https://drive.google.com/open?id=1zAOyAZ0bksdecO6Dtn1R6Lir7XGupf9o

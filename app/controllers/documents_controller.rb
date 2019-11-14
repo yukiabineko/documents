@@ -93,6 +93,11 @@ class DocumentsController < ApplicationController
     end
   end
 
+  #input select modal
+  def data
+   @document = Document.find(params[:id])
+  end
+
   def sendform
     debugger
   end
