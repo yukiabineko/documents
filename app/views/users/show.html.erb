@@ -1,5 +1,5 @@
 <div class="text-center text-success">
-  <%= "#{@user.name}さんページ" %>
+  <h1><%= "#{@user.name}さんページ" %></h1>
 </div>
 <hr>
 <div class="row">
@@ -10,10 +10,33 @@
         <tr>
           <th>タイトル</th>
           <th>期限</th>
-          <th>提出状況</th>
-          <th></th>
+          <th colspan= "2"></th>
         </tr>
       </thead>
+        <% @documents.each do |document| %>
+          <tr>
+            <td><%= document.title %></td>
+            <td>
+              <% if document.document_items.all.count > 0 && document.answers.last.nil? %>
+                <span style="background-color:red"><%= "期限#{document.deadline}" %></span>
+              <% elsif document.document_items.count == 0 && document.answers.last.nil? %>
+                 <span style="background-color:red"><%= "表示期限#{document.deadline}" %></span>
+              <% else %>
+              　 <span style="background-color:green">提出済み</span>
+              <% end %>
+            </td>
+            <td>
+              <% if document.answers.count == 0 %>
+               <%= link_to "提出する",document_path(document),class:"btn btn-info" %>
+              <% else %> 
+               <%= link_to "やり直す",document_path(document),class:"btn btn-warning" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <tbody>
+        
+      </tbody>
     </table>
   </div>
 </div>

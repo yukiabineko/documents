@@ -9,12 +9,6 @@ class UsersController < ApplicationController
 
   def show
     @documents = @user.documents.all
-    documents = Document.all
-    documents.each do |document|
-      unless document.user_id == @user.id
-        Document.create(title: document.title, memo: document.memo, pdf_link: document.pdf_link, deadline: document.deadline, user_id: @user.id)
-      end
-    end  
   end
 
   # GET /users/new

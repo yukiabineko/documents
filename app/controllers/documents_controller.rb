@@ -62,13 +62,15 @@ class DocumentsController < ApplicationController
   end
   #表示create
   def create3
-    @document = Document.new(document_params)
-    if @document.save
-      redirect_to root_url
-    else
-      render :new3
-    end    
-    
+   @users = User.all
+   randam =  SecureRandom.alphanumeric(10)
+   @users.each do |user|
+     record = user.documents.build(document_params)
+     record.randam = randam
+     record.user_id = user.id
+     record.save
+   end  
+   redirect_to root_url
   end    
 
   # PATCH/PUT /documents/1
