@@ -5,7 +5,8 @@ class CreateDocuments < ActiveRecord::Migration[5.1]
       t.text :memo
       t.text :pdf_link
       t.date :deadline
-
+      t.integer :user_id
+      t.string :randam
       t.timestamps
     end
   end

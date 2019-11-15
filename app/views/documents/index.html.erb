@@ -6,7 +6,8 @@
   <thead>
     <tr>
       <th>タイトル</th>
-      <th>内容</th>
+      <th>保護者名</th>
+      <th>概要</th>
       <th>期限</th>
       <th colspan="4"></th>
 
@@ -17,6 +18,7 @@
     <% @documents.each do |document| %>
       <tr>
         <td><%= document.title %></td>
+        <td><%= document.user.name %></td>
         <td><%= document.memo %></td>
         <td>
           <div class="bg-danger">
@@ -27,7 +29,7 @@
             <% end %>    
           </div>
         </td>
-        <td><%= link_to '見る', document %></td>
+        <td><%= link_to '提出', document %></td>
         <td><%= link_to '編集', edit_document_path(document) %></td>
         <td><%= link_to '削除', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

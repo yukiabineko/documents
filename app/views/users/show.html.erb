@@ -1,0 +1,21 @@
+<div class="text-center text-success">
+  <%= "#{@user.name}さんページ" %>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  　<h2>提出状況</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>期限</th>
+          <th>提出状況</th>
+          <th></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+<hr>
+<%= link_to 'Back', users_path %>

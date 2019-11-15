@@ -23,21 +23,16 @@ class DocumentSelectsController < ApplicationController
   def edit
   end
 
-  # POST /document_selects
-  # POST /document_selects.json
   def create
-    @document_select = DocumentSelect.new(document_select_params)
-  
-    respond_to do |format|
-      if @document_select.save
-        flash[:danger] = "引き続き項目作るならフォーム入力して送信を終わりなら終了ボタン押してください"
-        format.html { redirect_to '/documents_selects/new/'+@document_select.document_item_id.to_s }
-        format.json { render :show, status: :created, location: @document_select }
-      else
-        format.html { render :new }
-        format.json { render json: @document_select.errors, status: :unprocessable_entity }
-      end
-    end
+    @document_item = DocumentItem.find(params[:document_item_id])
+    @document_items = DocumentItem.where(content: @document_item.content,randam: @document_item.randam) #前項のdocumentからのid content
+    @document_items.each do |item|
+      record = item.document_selects.build(content: params[:content],document_item_id: item.id)
+      record.save
+    end  
+    @document_select = DocumentSelect.where(document_item_id: @document_item.id).last
+    flash[:danger] = "引き続き項目作るならフォーム入力して送信を終わりなら終了ボタン押してください"
+    redirect_to '/documents_selects/new/'+@document_select.document_item_id.to_s 
   end
 
   # PATCH/PUT /document_selects/1

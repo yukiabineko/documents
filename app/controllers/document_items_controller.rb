@@ -14,14 +14,10 @@ class DocumentItemsController < ApplicationController
 #選択式
   def new
     @document = Document.find(params[:id])
-    @document_item = DocumentItem.new
-    @document_item.document_id = @document.id
   end
 #選択式2  
  def new2
     @document = Document.find(params[:id])
-    @document_item = DocumentItem.new
-    @document_item.document_id = @document.id
   end
 
   # GET /document_items/1/edit
@@ -31,27 +27,33 @@ class DocumentItemsController < ApplicationController
   # POST /document_items
   # POST /document_items.json
   def create
-    @document_item = DocumentItem.new(document_item_params)
-
-    respond_to do |format|
-      if @document_item.save
-        format.html { redirect_to "/documents_selects/new/"+@document_item.id.to_s }
-        format.json { render :show, status: :created, location: @document_item }
-      else
-        format.html { render :new }
-        format.json { render json: @document_item.errors, status: :unprocessable_entity }
-      end
+    @document = Document.find(params[:document_id])
+    @documents = Document.where(memo: @document.memo,randam: @document.randam)  #メモの内容 ランダム文字列で判別
+    randam = SecureRandom.alphanumeric(10)
+    @documents.each do |document|
+      record = document.document_items.build(content: params[:content])
+      record.randam = randam
+      record.document_id = document.id
+      record.save
     end
+    @document_item = DocumentItem.all.last
+    redirect_to "/documents_selects/new/"+@document_item.id.to_s
   end
+
+
   def create2
-    @document_item = DocumentItem.new(document_item_params)
-    if @document_item.save
-      flash[:danger] = "引き続き項目作るならフォーム入力して送信を終わりなら終了ボタン押してください"
-      redirect_to "/documents_items/new2/"+@document_item.document_id.to_s
-    else
-      render :new
-    end    
-    
+    @document = Document.find(params[:document_id])
+    @documents = Document.where(memo: @document.memo, randam: @document.randam)
+    randam = SecureRandom.alphanumeric(10)
+    @documents.each do |document|
+      record = document.document_items.build(content: params[:content])
+      record.randam = randam
+      record.document_id = document.id
+      record.save
+    end  
+    @document_item =DocumentItem.all.last
+    flash[:danger] = "引き続き項目作るならフォーム入力して送信を終わりなら終了ボタン押してください"
+    redirect_to "/documents_items/new2/"+@document_item.document_id.to_s
   end  
 
   # PATCH/PUT /document_items/1

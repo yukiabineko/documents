@@ -1,4 +1,4 @@
-<%= form_with(model: document_select, local: true) do |form| %>
+<%= form_with(url:document_select_create_path(@document_item), local: true) do |form| %>
   <% if document_select.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(document_select.errors.count, "error") %> prohibited this document_select from being saved:</h2>
@@ -14,10 +14,6 @@
   <div class="field">
     <%= form.label :選択肢内容 %>
     <%= form.text_area :content, id: :document_select_content %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :document_item_id %>
   </div>
 
   <div class="actions">

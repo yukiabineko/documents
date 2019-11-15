@@ -36,27 +36,29 @@ class DocumentsController < ApplicationController
   # POST /documents
   # 選択createw
   def create
-    @document = Document.new(document_params)
-
-    respond_to do |format|
-      if @document.save
-        format.html { redirect_to "/documents_items/new/"+@document.id.to_s }
-        format.json { render :show, status: :created, location: @document }
-      else
-        format.html { render :new }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
-    end
+  @user = User.all
+  randam = SecureRandom.alphanumeric(10)
+  @user.each do |user|
+      record = user.documents.build(document_params)
+      record.randam = randam
+      record.user_id = user.id
+      record.save
+  end
+  @document = Document.all.last  #作られたユーザーごとの資料の最後
+    redirect_to "/documents_items/new/"+@document.id.to_s
   end
 #入力create
   def create2
-    @document = Document.new(document_params)
-    if @document.save
-      redirect_to "/documents_items/new2/"+@document.id.to_s 
-    else
-      render :new2
-    end    
-    
+    @users = User.all
+    randam = SecureRandom.alphanumeric(10)
+    @users.all.each do |user|
+      record = user.documents.build(document_params)
+      record.randam = randam
+      record.user_id = user.id
+      record.save
+    end  
+    @document = Document.all.last
+    redirect_to "/documents_items/new2/"+@document.id.to_s 
   end
   #表示create
   def create3

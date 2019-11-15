@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   root 'documents#index'
 
   get "documents/pdf-modal/:id",to:"documents#data",as: :data
@@ -7,7 +8,10 @@ Rails.application.routes.draw do
   get "documents_selects/new/:id",to:"document_selects#new"
 
   get "documents_items/new2/:id",to:"document_items#new2"
-  post"document_items/create2",to:"document_items#create2"
+  post"document_items/create/:document_id",to:"document_items#create",as: :document_item_create #ユーザー全体create
+  post"document_selects/create/:document_item_id",to:"document_selects#create",as: :document_select_create #ユーザー全体create
+
+  post"document_items/create2/:document_id",to:"document_items#create2",as: :document_item_create2#ユーザー全体create
   resources :document_items
   get "documents_items/new/:id",to:"document_items#new"
 
@@ -16,7 +20,7 @@ Rails.application.routes.draw do
 
   get "documents/new3",to:"documents#new3",as: :new3_document
   get "documents/new3/:id",to:"documents#new3"
-  post "documents/create2",to:"documents#create2",as: :document_create2
+  post "documents/create2",to:"documents#create2",as: :document_create2 #ユーザー全体create
   post "documents/create3",to:"documents#create3",as: :document_create3
   resources :documents
   post "documents/selectform/:id",to:"documents#selectform",as: :selectform

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191110220401) do
+ActiveRecord::Schema.define(version: 20191115073158) do
 
   create_table "answers", force: :cascade do |t|
     t.text "reply"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20191110220401) do
   create_table "document_items", force: :cascade do |t|
     t.text "content"
     t.integer "document_id"
+    t.string "randam"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 20191110220401) do
     t.text "content"
     t.integer "select_number"
     t.integer "document_item_id"
+    t.string "randam"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,6 +41,15 @@ ActiveRecord::Schema.define(version: 20191110220401) do
     t.text "memo"
     t.text "pdf_link"
     t.date "deadline"
+    t.integer "user_id"
+    t.string "randam"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
