@@ -19,8 +19,8 @@ module DocumentsHelper
   def view_url(url,link)
    #ﾘﾝｸが空入力なら
      if link.blank?
-      url == nil
-      link == nil
+      url = nil
+      link = nil
       return nil
      else 
        if url == "Google Drive"
