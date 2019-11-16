@@ -1,0 +1,8 @@
+<div class="text-center text-primary" style="font-size:30px;font-weight:bold;">
+    <h2><%= "#{@user.name}さん提出済み資料" %></h2><hr>
+    <div class="text-danger"><h1><%= @document.title %></h1></div>
+</div>
+<% @document.document_items.each do |document| %>
+  <div class="user_answer">
+  </div>
+<% end %>

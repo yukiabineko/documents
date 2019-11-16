@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users do
+    member do
+      get "file_show/:document_id",to:"users#file_show",as: :file_show
+    end    
+  end   
+  
   root 'documents#index'
 
   get "documents/pdf-modal/:id",to:"documents#data",as: :data

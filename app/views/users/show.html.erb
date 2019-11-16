@@ -8,34 +8,38 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>タイトル</th>
           <th>期限</th>
-          <th colspan= "2"></th>
+          <th colspan="2">タイトル</th>
         </tr>
       </thead>
+      <tbody>
         <% @documents.each do |document| %>
           <tr>
-            <td><%= document.title %></td>
             <td>
               <% if document.document_items.all.count > 0 && document.answers.last.nil? %>
                 <span style="background-color:red"><%= "期限#{document.deadline}" %></span>
               <% elsif document.document_items.count == 0 && document.answers.last.nil? %>
-                 <span style="background-color:red"><%= "表示期限#{document.deadline}" %></span>
+                 <span style="background-color:red"><%= "表示期限#{document.deadline+7}" %></span>
               <% else %>
               　 <span style="background-color:green">提出済み</span>
               <% end %>
             </td>
             <td>
               <% if document.answers.count == 0 %>
-               <%= link_to "提出する",document_path(document),class:"btn btn-info" %>
+                <span class="text-primary" style="font-size:14px;">
+                  <%= document.title %>|
+                </span>
+                <%= link_to "提出する",user_path(document),class:"btn btn-info" %>
               <% else %> 
-               <%= link_to "やり直す",document_path(document),class:"btn btn-warning" %>
+                <span class="text-primary" style="font-size:14px;">
+                  <%= link_to document.title,file_show_user_path(@user,document) %>
+                </span>
+                <span style="color:orange">済み</span>
+                <%= link_to "やり直す",document_path(document),class:"btn btn-warning" %>
               <% end %>
             </td>
           </tr>
         <% end %>
-      <tbody>
-        
       </tbody>
     </table>
   </div>
