@@ -18,7 +18,7 @@ class DocumentItemsController < ApplicationController
 #選択式2  
  def new2
     @document = Document.find(params[:id])
-  end
+ end
 
   # GET /document_items/1/edit
   def edit
@@ -49,9 +49,13 @@ class DocumentItemsController < ApplicationController
 
   def create2
     @document = Document.find(params[:document_id])
-    @documents = Document.where(memo: @document.memo, randam: @document.randam)
     randam = SecureRandom.alphanumeric(10)
-    @documents.each do |document|
+    if params[:content].blank?
+      flash[:danger] ="必ず入力ください。"
+      redirect_to "/documents_items/new2/"+@document.id.to_s
+    else
+      @documents = Document.where(memo: @document.memo, randam: @document.randam)
+      @documents.each do |document|
       record = document.document_items.build(content: params[:content])
       record.randam = randam
       record.document_id = document.id
@@ -59,7 +63,9 @@ class DocumentItemsController < ApplicationController
     end  
     @document_item =DocumentItem.all.last
     flash[:danger] = "引き続き項目作るならフォーム入力して送信を終わりなら終了ボタン押してください"
-    redirect_to "/documents_items/new2/"+@document_item.document_id.to_s
+    redirect_to "/documents_items/new2/"+@document_item.document_id.to_s  
+    end  
+    
   end  
 
   # PATCH/PUT /document_items/1
