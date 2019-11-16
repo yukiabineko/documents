@@ -6,9 +6,15 @@ class DocumentsController < ApplicationController
   def index
     @documents = Document.all
   end
-
-  # GET /documents/1
-  # GET /documents/1.json
+#教員2
+  def teacher1
+    @documents = Document.all  
+  end
+#教員書類選別
+  def teacher2
+    @documents = Document.all  
+  end
+#提出ページ
   def show
     @input_count = @document.document_items.all.count
     @select_count = select_zerocount?

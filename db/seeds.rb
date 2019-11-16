@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 array= [["太郎",20],["次郎",18],["三郎",15],["四郎",12],["五郎",8],["六郎",5],["七郎",1]]
 
+User.create!(name: "教員",age: 35)
+
 6.times do |i|
     User.create!(name: array[i][0], age: array[i][1])
 end    

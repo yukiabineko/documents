@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   post"document_items/create2/:document_id",to:"document_items#create2",as: :document_item_create2#ユーザー全体create
   resources :document_items
   get "documents_items/new/:id",to:"document_items#new"
-
+  
+  
+  get "document/teacher1",to:"documents#teacher1",as: :teacher1
   get "documents/new2",to:"documents#new2",as: :new2_document
   get "documents/new2/:id",to:"documents#new2"
 
