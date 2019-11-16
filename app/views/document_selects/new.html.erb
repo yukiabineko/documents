@@ -4,8 +4,9 @@
 <% end %>
 <h2><%= "質問:#{@document_item.content}" %>
 <%= render 'form', document_select: @document_select %>
-
-<%= link_to '終了', root_path,class:"btn btn-default" %>
+<% if @select_count >=2 %>
+  <%= link_to '終了', root_path,class:"btn btn-default" %>
+<% end %>  
 <%= link_to "新規質問作成","/documents_items/new/"+@document_item.document_id.to_s,class:"btn btn-primary" %>
 <style>
   body{ background-color:#00FF00;}

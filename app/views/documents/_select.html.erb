@@ -16,14 +16,15 @@
 <% item_count = 0 %>
 <%= form_with(url:selectform_path(@document),local:true) do |f| %>
  <% @document.document_items.each do |item| %>
+   <% item_count += 1 %>
    <h2 style="background-color:orange;border-left:8px solid blue;padding:12px;">
      <%= item.content %>
    </h2>
    <% item.document_selects.each do |select| %>
-     <% item_count += 1 %>
+     
      <div style="border-radius:6px;padding:3px;border:0.5px solid blue;background-color:#fff;">
        <label style="font-size:16px">
-         <input type="radio" name="rd<%=item_count %>" value="<%= select.content %>">
+         <input type="radio" name="rd<%= item_count %>" value="<%= select.content %>">
          <%= select.content %>
        </label>  
      </div>
