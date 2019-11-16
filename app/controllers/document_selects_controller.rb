@@ -26,14 +26,19 @@ class DocumentSelectsController < ApplicationController
 
   def create
     @document_item = DocumentItem.find(params[:document_item_id])
-    @document_items = DocumentItem.where(content: @document_item.content,randam: @document_item.randam) #前項のdocumentからのid content
-    @document_items.each do |item|
+    if params[:content].blank?
+      flash[:danger] = "必ず書き込んでください。"
+      redirect_to "/documents_selects/new/"+@document_item.id.to_s
+    else
+      @document_items = DocumentItem.where(content: @document_item.content,randam: @document_item.randam) #前項のdocumentからのid content
+      @document_items.each do |item|
       record = item.document_selects.build(content: params[:content],document_item_id: item.id)
       record.save
     end  
     @document_select = DocumentSelect.where(document_item_id: @document_item.id).last
     flash[:danger] = "引き続き項目作るならフォーム入力して送信を終わりなら終了ボタン押してください"
     redirect_to '/documents_selects/new/'+@document_select.document_item_id.to_s 
+    end  
   end
 
   # PATCH/PUT /document_selects/1

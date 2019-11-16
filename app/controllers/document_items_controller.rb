@@ -28,16 +28,22 @@ class DocumentItemsController < ApplicationController
   # POST /document_items.json
   def create
     @document = Document.find(params[:document_id])
-    @documents = Document.where(memo: @document.memo,randam: @document.randam)  #メモの内容 ランダム文字列で判別
-    randam = SecureRandom.alphanumeric(10)
-    @documents.each do |document|
-      record = document.document_items.build(content: params[:content])
-      record.randam = randam
-      record.document_id = document.id
-      record.save
-    end
+    #未入力処理
+    if params[:content].blank?
+      flash[:danger] = "必ず入力してください。" 
+      redirect_to "/documents_items/new/"+@document.id.to_s
+    else
+      @documents = Document.where(memo: @document.memo,randam: @document.randam)  #メモの内容 ランダム文字列で判別
+      randam = SecureRandom.alphanumeric(10)
+      @documents.each do |document|
+        record = document.document_items.build(content: params[:content])
+        record.randam = randam
+        record.document_id = document.id
+        record.save
+      end
     @document_item = DocumentItem.all.last
     redirect_to "/documents_selects/new/"+@document_item.id.to_s
+    end     
   end
 
 

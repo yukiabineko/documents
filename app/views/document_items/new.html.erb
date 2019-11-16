@@ -1,9 +1,11 @@
+<% if flash[:danger].present? %>
+ <div class="alert alert-danger"><%= flash[:danger] %></div>
+<% end %>
 <h1>質問の作成</h1>
 <hr>
 <h2><%= "タイトル:#{@document.title}" %>
 <%= render 'form', document_item: @document_item %>
 
-<%= link_to "終了", root_path,class:"btn btn-default" %>
 <style>
   body{ background-color:#00FF00;}
 </style>
