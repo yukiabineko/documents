@@ -105,6 +105,15 @@ class DocumentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  #教員ファイル削除
+  def file_delete
+    document = Document.find(params[:document_id])
+    documents = Document.where(memo: document.memo, randam: document.randam)
+    documents.delete_all
+    flash[:danger] = "資料を削除しました。"
+    redirect_to teacher2_url
+    
+  end
 
   #input select modal
   def data
