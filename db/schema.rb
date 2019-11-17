@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20191115073158) do
     t.date "deadline"
     t.integer "user_id"
     t.string "randam"
+    t.boolean "public", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

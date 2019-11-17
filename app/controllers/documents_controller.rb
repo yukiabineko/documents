@@ -52,6 +52,10 @@ class DocumentsController < ApplicationController
       record.randam = randam
       record.user_id = user.id
       record.save
+      if user.id == 1
+        record.public = true
+        record.save
+      end  
   end
   @document = Document.all.last  #作られたユーザーごとの資料の最後
     redirect_to "/documents_items/new/"+@document.id.to_s
@@ -65,6 +69,10 @@ class DocumentsController < ApplicationController
       record.randam = randam
       record.user_id = user.id
       record.save
+      if user.id == 1
+        record.public = true
+        record.save
+      end  
     end  
     @document = Document.all.last
     redirect_to "/documents_items/new2/"+@document.id.to_s 
@@ -78,6 +86,10 @@ class DocumentsController < ApplicationController
      record.randam = randam
      record.user_id = user.id
      record.save
+     if user.id == 1
+      record.public = true
+      record.save
+    end  
    end  
    redirect_to root_url
   end    
@@ -154,6 +166,18 @@ class DocumentsController < ApplicationController
     answer.save
     redirect_to root_url
   end
+  #保護者へ作成した書類公表
+    def public_change
+      document = Document.find(params[:document_id])
+      @documents = Document.where(memo: document.memo, randam: document.randam)
+      @documents.each do |document|
+        document.public =true
+        document.save
+      end  
+      flash[:sucess] = "保護者に提出しました。"
+      redirect_to teacher2_url
+    end
+    
 
   private
     # Use callbacks to share common setup or constraints between actions.

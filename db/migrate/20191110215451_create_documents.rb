@@ -7,6 +7,7 @@ class CreateDocuments < ActiveRecord::Migration[5.1]
       t.date :deadline
       t.integer :user_id
       t.string :randam
+      t.boolean :public,default:false
       t.timestamps
     end
   end

@@ -5,8 +5,9 @@
 <hr>
 <h2><%= "タイトル:#{@document.title}" %>
 <%= render 'form2', document_item: @document_item %>
-
-<%= link_to "終了", root_path,class:"btn btn-default" %>
+<% if @item_count >=1 %>
+  <%= link_to "終了", root_path,class:"btn btn-default" %>
+<% end %>  
 <style>
 body{
     background-color:#fce2c4

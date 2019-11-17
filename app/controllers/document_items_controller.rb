@@ -18,6 +18,7 @@ class DocumentItemsController < ApplicationController
 #選択式2  
  def new2
     @document = Document.find(params[:id])
+    @item_count = @document.document_items.all.count
  end
 
   # GET /document_items/1/edit

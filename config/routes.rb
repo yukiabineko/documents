@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get "document/teacher1",to:"documents#teacher1",as: :teacher1
   get "document/teacher2",to:"documents#teacher2",as: :teacher2
   delete "document/file_delete/:document_id",to:"documents#file_delete",as: :file_delete                           #ファイル削除
+  get "document/public_change/:document_id",to:"documents#public_change",as: :public_change                       #保護者へ提出
 
   get "documents/new2",to:"documents#new2",as: :new2_document
   get "documents/new2/:id",to:"documents#new2"

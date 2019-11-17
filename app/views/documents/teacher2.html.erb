@@ -40,11 +40,13 @@
               </td>
               <td>
                   <%= link_to "削除",file_delete_path(document),class:"btn btn-warning",method: :delete %>
+                  <%= link_to "保護者に提出",public_change_path(document),class:"btn btn-success" %>
               </td>
             </tr>
           <% end %>  
          </tbody>
        </table>
+       
       <% else %>
        <div style="background-color:#c0c0c0;padding:2%;border-radius:10px;text-align:center;width:100%;">
            <h1 style="color:#fff;font-weight:bold;">書類がありません</h1>
