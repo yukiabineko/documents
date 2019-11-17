@@ -12,7 +12,10 @@ class DocumentsController < ApplicationController
   end
 #教員書類選別
   def teacher2
-    @documents = Document.all  
+    #教員をユーザーid 1にセットしそれを元に資料を操作していく
+    @user = User.find 1 #教員
+    @users_count = User.all.count-1 #教員の数のみマイナス
+    @documents = @user.documents.all
   end
 #提出ページ
   def show

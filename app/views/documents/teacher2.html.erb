@@ -1,0 +1,43 @@
+<div class="text-center text-primary bg-warning" style="padding:8px;font-weight:bold;">
+  <h1><%= "#{@user.name}書類管理ページ" %></h1>
+</div><br>
+<%= link_to "教員1へ",documents_path,class:"btn btn-info",style:"width:25%;" %><br><br>
+<div style="border-top:2px dotted blue;"></div><br>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 bg-info" style="border-radius:12px;">
+   <table class="table table-bordered" style="margin-top:3%;">
+     <thead>
+       <tr>
+         <th>タイトル</th>
+         <th>期限</th>
+         <th>提出状況</th>
+         <th></th>
+       </tr>
+     </thead>
+     <tbody>
+     <!-- 教員のみの資料表示 -->
+      <% @documents.each do |document| %>
+        <tr>
+          <td><%= document.title %></td>
+          <td>
+            <!-- 書類タイプ -->
+            <% if document.document_items.all.count > 0 %>
+              提出期限:<span style="color:red"><%= document.deadline %></span>
+            <% elsif document.document_items.all.count == 0 %>
+              表示期限:<span style="color:red"><%= document.deadline+7 %></span>
+            <% elsif document.deadline.blank? %>
+             指定無し  
+            <% end %>
+          </td>
+          <td>
+            <% if document.memo.present? %>
+              <%= reply_count(document.memo,document.randam).to_s + "/" + @users_count.to_s  %>
+            <% end %>  
+          </td>
+          <td></td>
+        </tr>
+      <% end %>  
+     </tbody>
+   </table>
+  </div>
+</div>
