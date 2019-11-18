@@ -10,8 +10,8 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>期限</th>
-          <th colspan="2">タイトル</th>
+          <th class="th">期限</th>
+          <th class="th" colspan="2">タイトル</th>
         </tr>
       </thead>
       <tbody>
@@ -32,7 +32,9 @@
                     <span class="text-primary" style="font-size:14px;">
                       <%= document.title %>|
                     </span>
+                    <!-- ユーザー1の時は表示しない -->
                     <%= link_to "提出する",document_path(document),class:"btn btn-info" unless @user.id == 1 %>
+                    <style>.th{display: none;}</style>
                   <% else %> 
                     <span class="text-primary" style="font-size:14px;">
                         <%= link_to document.title,file_show_user_path(@user,document) %>
