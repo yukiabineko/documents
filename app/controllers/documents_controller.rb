@@ -64,7 +64,7 @@ class DocumentsController < ApplicationController
         @errors += "deadline:" unless params[:document][:deadline].present?
         
         flash[:danger] = @errors
-        redirect_to new_document_url
+        redirect_to new_document_url(document_params)
         return
       end    
   end

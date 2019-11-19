@@ -1,4 +1,6 @@
-<%= form_with(model: document,url:yield(:url), local: true) do |form| %>
+<%= form_with(model: document,url:yield(:url), local: true,id:"form_id") do |form| %>
+ <!-- flashデータ-->
+ <% flashArray = flash[:danger].split(":") if flash[:danger].present? %>
   <% if document.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
@@ -13,20 +15,26 @@
 <div class="row" style="background-color:#c0c0c0;border-radius:8px;">
   <div class="col-md-8 col-md-offset-2"><br>
     <div class="field">
-      <% if flash[:danger] %>
-       <div class="alert alert-danger"><%= flash[:danger].split(":")[0]  if flash[:danger].split(":")[0] == "title" %></div>
+     <% if flashArray %>
+       <!-- split分割された配列にtitleあるかどうか? -->
+      <% if flashArray.include?("title") %>
+       <div class="alert alert-danger">title</div>
       <% end %>
+     <% end %> 
       <%= form.label :タイトル %>
-      <%= form.text_field :title, id: :document_title,class:"form-control" %>
+      <%= form.text_field :title, id: :document_title,class:"form-control",value:params[:title] %>
     </div>
 
     <% unless yield(:url) == document_create3_path %>
-      <div class="field">
-      <% if flash[:danger] %>
-       <div class="alert alert-danger"><%= flash[:danger].split(":")[1]  if flash[:danger].split(":")[1] == "memo" %></div>
+      <div class="field"> 
+      <% if flashArray %>
+      <!-- split分割された配列にmemoあるかどうか? -->
+       <% if  flashArray.include?("memo") %>
+         <div class="alert alert-danger">memo</div>
+       <% end %>
       <% end %>
         <%= form.label :資料の概要 %>
-        <%= form.text_area :memo, id: :document_memo,class:"form-control" %>
+        <%= form.text_area :memo, id: :document_memo,class:"form-control",value:params[:memo] %>
       </div>
     <% end %>
 
@@ -36,15 +44,18 @@
     <div class="field">
      
       <%= form.label :外部リンク %>
-      <%= form.text_field :service_url, id: :document_pdf_link,class:"form-control" %>
+      <%= form.text_field :service_url, id: :document_pdf_link,class:"form-control",value:params[:service_url] %>
     </div>
 
     <div class="field">
-       <% if flash[:danger] %>
-         <div class="alert alert-danger"><%= flash[:danger].split(":")[2]  if flash[:danger].split(":")[2] == "deadline" %></div>
+       <% if flashArray %>
+        <!-- split分割された配列にdeadlineあるかどうか? -->
+        <%  if flashArray.include?("deadline") %>
+         <div class="alert alert-danger">deadline</div>
+        <% end %> 
        <% end %>
       <%= form.label :期限　%>
-      <%= form.date_field :deadline, id: :document_deadline,class:"form-control" %>
+      <%= form.date_field :deadline, id: :document_deadline,class:"form-control",value:params[:deadline] %>
     </div>
 
     <div class="actions">
