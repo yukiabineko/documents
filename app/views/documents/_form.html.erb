@@ -17,8 +17,8 @@
     <div class="field">
      <% if flashArray %>
        <!-- split分割された配列にtitleあるかどうか? -->
-      <% if flashArray.include?("title") %>
-       <div class="alert alert-danger">title</div>
+      <% if flashArray.include?("タイトルが有りません。") %>
+       <div class="alert alert-danger">タイトルが有りません。</div>
       <% end %>
      <% end %> 
       <%= form.label :タイトル %>
@@ -29,8 +29,8 @@
       <div class="field"> 
       <% if flashArray %>
       <!-- split分割された配列にmemoあるかどうか? -->
-       <% if  flashArray.include?("memo") %>
-         <div class="alert alert-danger">memo</div>
+       <% if  flashArray.include?("概要は必須です。") %>
+         <div class="alert alert-danger">概要は必須です。</div>
        <% end %>
       <% end %>
         <%= form.label :資料の概要 %>
@@ -50,8 +50,8 @@
     <div class="field">
        <% if flashArray %>
         <!-- split分割された配列にdeadlineあるかどうか? -->
-        <%  if flashArray.include?("deadline") %>
-         <div class="alert alert-danger">deadline</div>
+        <%  if flashArray.include?("期限は必須です。") %>
+         <div class="alert alert-danger">期限は必須です。</div>
         <% end %> 
        <% end %>
       <%= form.label :期限　%>

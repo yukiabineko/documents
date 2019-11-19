@@ -59,9 +59,9 @@ class DocumentsController < ApplicationController
       else
         #自作errorチェック
         @errors = ""
-        @errors += "title:" unless params[:document][:title].present?
-        @errors += "memo:" unless params[:document][:memo].present?
-        @errors += "deadline:" unless params[:document][:deadline].present?
+        @errors += "タイトルが有りません。:" unless params[:document][:title].present?
+        @errors += "概要は必須です。:" unless params[:document][:memo].present?
+        @errors += "期限は必須です。:" unless params[:document][:deadline].present?
         
         flash[:danger] = @errors
         redirect_to new_document_url(document_params)
@@ -80,10 +80,21 @@ class DocumentsController < ApplicationController
       record = user.documents.build(document_params)
       record.randam = randam
       record.user_id = user.id
-      record.save
-      if user.id == 1
-        record.public = true
-        record.save
+      if record.save
+        if user.id == 1
+          record.public = true
+          record.save
+        end  
+      else
+        #自作errorチェック
+        @errors = ""
+        @errors += "タイトルが有りません。:" unless params[:document][:title].present?
+        @errors += "概要は必須です。:" unless params[:document][:memo].present?
+        @errors += "期限は必須です。:" unless params[:document][:deadline].present?
+        
+        flash[:danger] = @errors
+        redirect_to new2_document_url(document_params)
+        return    
       end  
     end  
     @document = Document.all.last
@@ -96,11 +107,23 @@ class DocumentsController < ApplicationController
    @users.each do |user|
      record = user.documents.build(document_params)
      record.randam = randam
+     record.memo = "download資料"
      record.user_id = user.id
-     record.save
-     if user.id == 1
-      record.public = true
-      record.save
+     if record.save
+       if user.id == 1
+        record.public = true
+        record.save
+       end 
+    else
+      #自作errorチェック
+      @errors = ""
+      @errors += "タイトルが有りません。:" unless params[:document][:title].present?
+      @errors += "概要は必須です。:" unless params[:document][:memo].present?
+      @errors += "期限は必須です。:" unless params[:document][:deadline].present?
+      
+      flash[:danger] = @errors
+      redirect_to new3_document_url(document_params)
+      return      
     end  
    end  
    redirect_to root_url
