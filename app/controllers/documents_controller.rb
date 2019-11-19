@@ -51,14 +51,26 @@ class DocumentsController < ApplicationController
       record = user.documents.build(document_params)
       record.randam = randam
       record.user_id = user.id
-      record.save
-      if user.id == 1
-        record.public = true
-        record.save
-      end  
+      if record.save
+        if user.id == 1
+          record.public = true
+          record.save
+        end  
+      else
+        #自作errorチェック
+        @errors = ""
+        @errors += "title:" unless params[:document][:title].present?
+        @errors += "memo:" unless params[:document][:memo].present?
+        @errors += "deadline:" unless params[:document][:deadline].present?
+        
+        flash[:danger] = @errors
+        redirect_to new_document_url
+        return
+      end    
   end
   @document = Document.all.last  #作られたユーザーごとの資料の最後
     redirect_to "/documents_items/new/"+@document.id.to_s
+    return
   end
 #入力create
   def create2
